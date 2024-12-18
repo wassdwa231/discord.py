@@ -109,10 +109,12 @@ async def ban(interaction: Interaction, member: nextcord.Member, reasons: str):
 
     await interaction.followup.send(f"{member.mention} has been banned for: {reasons}")
     
+    
 @bot.slash_command(name="roleadd", description="adding new roles to the best members", guild_ids=[1316669327830810675])
-
-async def name(interaction: nextcord.Interaction, member: nextcord.Member):
-    
-    role = nextcord.utils.get(member.guild.roles, name="what")
-    
-    await member.add_roles(role)
+async def name(interaction: nextcord.Interaction, member: nextcord.Member, roles: nextcord.Role):
+    rolee = nextcord.utils.get(member.guild.roles)
+    if rolee:
+        await member.add_roles(roles)
+        await interaction.response.send_message("ok great")
+    else:
+        await interaction.response.send_message("NOP !!!!!")
